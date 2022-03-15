@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>CloudApps on The Wondering Techie</title>
-    <link>https://wonderingtechie.com/tags/cloudapps/</link>
+    <link>https://www.wonderingtechie.com/tags/cloudapps/</link>
     <description>Recent content in CloudApps on The Wondering Techie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 14 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://wonderingtechie.com/tags/cloudapps/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 14 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wonderingtechie.com/tags/cloudapps/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Part 1 - Application Troubles in the Cloud (Symptom: Kubernetes POD Failures or often Restarts)</title>
-      <link>https://wonderingtechie.com/post/2022/part-1-application-trouble-in-the-cloud-pod-restarts/</link>
+      <link>https://www.wonderingtechie.com/post/2022/part-1-application-trouble-in-the-cloud-pod-restarts/</link>
       <pubDate>Mon, 14 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://wonderingtechie.com/post/2022/part-1-application-trouble-in-the-cloud-pod-restarts/</guid>
+      <guid>https://www.wonderingtechie.com/post/2022/part-1-application-trouble-in-the-cloud-pod-restarts/</guid>
       <description>
         
           
