@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenShift on The Wondering Techie</title>
+    <link>https://wonderingtechie.com/categories/openshift/</link>
+    <description>Recent content in OpenShift on The Wondering Techie</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 14 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://wonderingtechie.com/categories/openshift/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Part 1 - Application Troubles in the Cloud (Symptom: Kubernetes POD Failures or often Restarts)</title>
+      <link>https://wonderingtechie.com/post/2022/part-1-application-trouble-in-the-cloud-pod-restarts/</link>
+      <pubDate>Mon, 14 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://wonderingtechie.com/post/2022/part-1-application-trouble-in-the-cloud-pod-restarts/</guid>
+      <description>
+        
+          
+            Introduction I have recently supported a customer to deploy numerous applications over multiple OpenShift clusters running on top of hundreds of worker nodes, using external storage infrastructure for persistence and Red Hat Service Mesh (OSSM) for enctyption, authentication and traffic management.
+The method to deliver in this environment did not differ too much from delivering the applications in any other environment, with automation involved throughout, however when an application issue was reported for many of the platform maintenance team members it was not possible to hone in quickly on the area they should focus on.
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
