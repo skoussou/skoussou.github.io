@@ -16,7 +16,7 @@
       <description>
         
           
-            Introduction I have recently supported a customer to deploy numerous applications over multiple OpenShift clusters running on top of hundreds of worker nodes, using external storage infrastructure for persistence and Red Hat Service Mesh (OSSM) for enctyption, authentication and traffic management.
+            Introduction I have recently supported a customer to deploy numerous applications over multiple OpenShift clusters running on top of hundreds of worker nodes, using external storage infrastructure for persistence and Red Hat Service Mesh (OSSM) for encryption, authentication and traffic management.
 The method to deliver in this environment did not differ too much from delivering the applications in any other environment, with automation involved throughout, however when an application issue was reported for many of the platform maintenance team members it was not possible to hone in quickly on the area they should focus on.
           
           
