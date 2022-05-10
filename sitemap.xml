@@ -3,21 +3,39 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.wonderingtechie.com/</loc>
-    <lastmod>2022-04-18T00:00:00+00:00</lastmod>
+    <lastmod>2022-05-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.wonderingtechie.com/years/2022/</loc>
-    <lastmod>2022-04-18T00:00:00+00:00</lastmod>
+    <lastmod>2022-05-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.wonderingtechie.com/categories/</loc>
-    <lastmod>2022-04-18T00:00:00+00:00</lastmod>
+    <lastmod>2022-05-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/post/2022/ossm-mtls-on-or-off/</loc>
+    <lastmod>2022-05-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/tags/openshift/</loc>
+    <lastmod>2022-05-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/tags/ossm/</loc>
+    <lastmod>2022-05-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/tags/servicemesh/</loc>
+    <lastmod>2022-05-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/categories/servicemesh/</loc>
+    <lastmod>2022-05-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/tags/</loc>
+    <lastmod>2022-05-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/years/</loc>
+    <lastmod>2022-05-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.wonderingtechie.com/series/cloud-apps-troubleshoot/</loc>
     <lastmod>2022-04-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.wonderingtechie.com/tags/cloudapps/</loc>
-    <lastmod>2022-04-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.wonderingtechie.com/tags/openshift/</loc>
     <lastmod>2022-04-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.wonderingtechie.com/categories/openshift/</loc>
@@ -29,13 +47,7 @@
     <loc>https://www.wonderingtechie.com/series/</loc>
     <lastmod>2022-04-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://www.wonderingtechie.com/tags/</loc>
-    <lastmod>2022-04-18T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://www.wonderingtechie.com/tags/troubleshooting/</loc>
-    <lastmod>2022-04-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.wonderingtechie.com/years/</loc>
     <lastmod>2022-04-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.wonderingtechie.com/post/2022/part-2-application-trouble-in-the-cloud-servicemesh-app-performance/</loc>

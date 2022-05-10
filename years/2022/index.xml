@@ -6,7 +6,24 @@
     <description>Recent content in 2022 on The Wondering Techie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wonderingtechie.com/years/2022/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wonderingtechie.com/years/2022/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mTLS in the Mesh with Redhat OpenShift Service Mesh (OSSM) - On or Off?</title>
+      <link>https://www.wonderingtechie.com/post/2022/ossm-mtls-on-or-off/</link>
+      <pubDate>Tue, 10 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wonderingtechie.com/post/2022/ossm-mtls-on-or-off/</guid>
+      <description>
+        
+          
+            Introduction One of the benefits of a service mesh is security by design, in fact it is one of the main use cases which drives adoption of the mesh in cloud based environments where there are disparate types of microservice workloads.
+Although this is very powerful as one can imagine there may be cases that a workload cannot participate in mTLS handshakes using the default mesh certificates. This is due to a workload having to handle its own TLS termination or because simply it should not receive TLS traffic (performance or policy reasons).
+          
+          
+        
+      </description>
+    </item>
+    
     <item>
       <title>Part 3 - Application Troubles in the Cloud (Symptom: Application Functional Problems)</title>
       <link>https://www.wonderingtechie.com/post/2022/part-3-application-trouble-in-the-cloud-application-functional-issues/</link>
