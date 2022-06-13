@@ -6,7 +6,23 @@
     <description>Recent content in ServiceMesh on The Wondering Techie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wonderingtechie.com/categories/servicemesh/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wonderingtechie.com/categories/servicemesh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Red Hat Openshift Service Mesh - Federation Automated Setup</title>
+      <link>https://www.wonderingtechie.com/post/2022/ossm-federation-scripted/</link>
+      <pubDate>Mon, 13 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wonderingtechie.com/post/2022/ossm-federation-scripted/</guid>
+      <description>
+        
+          
+            Service Mesh Federation Sometimes requirements (high-availability, multi-region solutions) dictate the split a solution deployments over multiple clusters. This brings the question how should we discover and call these services from within Openshift Container Platform deployed workloads without explicit definition of the deployment location as far as the calling service is concerned. Red Hat Openshift Service Mesh (OSSM) based on Istio offers Federation of services to allow to export/import remote service as local.
+          
+          
+        
+      </description>
+    </item>
+    
     <item>
       <title>mTLS in the Mesh with Redhat OpenShift Service Mesh (OSSM) - On or Off?</title>
       <link>https://www.wonderingtechie.com/post/2022/ossm-mtls-on-or-off/</link>
