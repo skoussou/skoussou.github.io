@@ -6,7 +6,23 @@
     <description>Recent content on The Wondering Techie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wonderingtechie.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wonderingtechie.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Red Hat OpenShift Service Mesh (OSSM) - Security options with mTLS for egress edge traffic</title>
+      <link>https://www.wonderingtechie.com/post/2022/ossm-security-with-mtls-for-egress-edge-traffic/</link>
+      <pubDate>Thu, 11 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wonderingtechie.com/post/2022/ossm-security-with-mtls-for-egress-edge-traffic/</guid>
+      <description>
+        
+          
+            The Service Mesh provides the option to boost application security with mTLS enabled traffic between in mesh application components and external (to the mesh) services. In the context of Service Mesh eggress edge traffic there are several configuration options for this security feature and in this article we have clearly listed below the options (including options for clear text traffic) along with a linked example to get hands-on expertise with each scenario.
+          
+          
+        
+      </description>
+    </item>
+    
     <item>
       <title>Red Hat Openshift Service Mesh - Federation Automated Setup</title>
       <link>https://www.wonderingtechie.com/post/2022/ossm-federation-scripted/</link>

@@ -18,14 +18,14 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="TBD">
+<meta name="description" content="The article lists the current options to setup `mTLS` with external (to the mesh) services">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@SteliosKousouri">
 <meta name="twitter:title" content="Red Hat OpenShift Service Mesh (OSSM) - Security options with mTLS for egress edge traffic" />
 <meta property="og:url" content="https://www.wonderingtechie.com/post/2022/ossm-security-with-mtls-for-egress-edge-traffic/" />
 <meta property="og:title" content="Red Hat OpenShift Service Mesh (OSSM) - Security options with mTLS for egress edge traffic" />
-<meta property="og:description" content="TBD" />
-<meta property="og:image" content="https://www.wonderingtechie.com/post/2022/ossm-security-with-mtls-for-egress-edge-traffic/images/20220516/mTLS-egress-edge-security-options.jpg" />
+<meta property="og:description" content="The article lists the current options to setup `mTLS` with external (to the mesh) services" />
+<meta property="og:image" content="https://www.wonderingtechie.com/post/2022/ossm-security-with-mtls-for-egress-edge-traffic/images/20220811/mTLS-egress-edge-security-options.jpg" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://www.wonderingtechie.com/icons/favicon-thewonderingtechie.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://www.wonderingtechie.com/icons/favicon-thewonderingtechie.png">
@@ -118,10 +118,11 @@
   <use xlink:href="#calendar"></use>
 </svg></span>
     <span class="post_date">
-      May 11, 2022</span>
-    <span class="post_time"> · 1 min read</span><span>&nbsp;· <a href='https://www.wonderingtechie.com/tags/ossm' title="ossm" class="post_tag button button_translucent">ossm
+      Aug 11, 2022</span>
+    <span class="post_time"> · 2 min read</span><span>&nbsp;· <a href='https://www.wonderingtechie.com/tags/ossm' title="ossm" class="post_tag button button_translucent">ossm
         </a><a href='https://www.wonderingtechie.com/tags/servicemesh' title="ServiceMesh" class="post_tag button button_translucent">ServiceMesh
         </a><a href='https://www.wonderingtechie.com/tags/openshift' title="OpenShift" class="post_tag button button_translucent">OpenShift
+        </a><a href='https://www.wonderingtechie.com/tags/mtls' title="mtls" class="post_tag button button_translucent">mtls
         </a>
     </span>
     <span class="page_only">&nbsp;·
@@ -237,7 +238,7 @@
           
         
 
-        <img class="image_figure image_featured image_internal" src="https://www.wonderingtechie.com/images/20220516/mTLS-egress-edge-security-options.jpg" alt="" loading="lazy" decoding="async" width="4496" height="3000"  />
+        <img class="image_figure image_featured image_internal" src="https://www.wonderingtechie.com/images/20220811/mTLS-egress-edge-security-options.jpg" alt="" loading="lazy" decoding="async" width="4496" height="3000"  />
       
 
     </picture>
@@ -250,7 +251,7 @@
       <nav id="TableOfContents"></nav>
     </div>
     
-    <div class="post_body"><p>The Service Mesh provides the option to boost application security with <code>mTLS</code> enabled traffic between application components and external services. There are several configuration options for this security feature, in the context of Service Mesh <code>eggress</code> edge traffic, and the opions are listed below along with a linked example to get hands-on expertise with each scenario.</p>
+    <div class="post_body"><p>The Service Mesh provides the option to boost application security with <code>mTLS</code> enabled traffic between <em>in mesh</em> application components and external (<em>to the mesh</em>) services. In the context of Service Mesh <code>eggress</code> edge traffic there are several configuration options for this security feature and in this article we have clearly listed below the options (including options for <em>clear text</em> traffic) along with a linked example to get hands-on expertise with each scenario.</p>
 
 
 
@@ -425,6 +426,11 @@
         
         <a href='https://www.wonderingtechie.com/tags/index/' class="post_tag button button_translucent" title="index">
           INDEX
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/tags/mtls/' class="post_tag button button_translucent" title="mtls">
+          MTLS
           <span class="button_tally">1</span>
         </a>
         
