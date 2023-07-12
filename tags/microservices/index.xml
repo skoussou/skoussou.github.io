@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>microservices on The Wondering Techie</title>
+    <link>https://www.wonderingtechie.com/tags/microservices/</link>
+    <description>Recent content in microservices on The Wondering Techie</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 12 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wonderingtechie.com/tags/microservices/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS Lambda to Quarkus Migration Patterns</title>
+      <link>https://www.wonderingtechie.com/post/2023/aws-lambda-to-quarkus-migration-patterns/</link>
+      <pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wonderingtechie.com/post/2023/aws-lambda-to-quarkus-migration-patterns/</guid>
+      <description>
+        
+          
+            Introduction Recently, we were tasked with the migration of a set of AWS Java Lambda applications to containers on Red Hat&#39;s Kubernetes Platform of OpenShift on the Azure cloud. AWS Lambdas are compute services that let you run code without provisioning or managing servers and they can do so on-demand, on the other hand containers offer richer functionality with the ability to run long-running, on-demand, in-memory multithreaded services whilst they demand your attention to the configuration of the underlying container framework.
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
