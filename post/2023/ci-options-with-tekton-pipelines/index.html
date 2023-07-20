@@ -1,0 +1,1152 @@
+
+<!DOCTYPE html>
+<html lang="en" data-figures="" class="page">
+  <head>
+<title>CI Implementations with Tekton Resolvers and Pipelines As Code | The Wondering Techie</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FE522MLXRL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FE522MLXRL');
+</script>
+
+  
+<meta property="og:locale" content="en" />
+
+<meta property="og:type" content="article">
+<meta name="description" content="The article showcases how to utilize resolvers in tekton pipelines and migrating them to pipelines as code.">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:creator" content="@SteliosKousouri">
+<meta name="twitter:title" content="CI Implementations with Tekton Resolvers and Pipelines As Code" />
+<meta property="og:url" content="https://www.wonderingtechie.com/post/2023/ci-options-with-tekton-pipelines/" />
+<meta property="og:title" content="CI Implementations with Tekton Resolvers and Pipelines As Code" />
+<meta property="og:description" content="The article showcases how to utilize resolvers in tekton pipelines and migrating them to pipelines as code." />
+<meta property="og:image" content="https://www.wonderingtechie.com/post/2023/ci-options-with-tekton-pipelines/images/20230720/ci-tekton-resolvers-pipelines-as-code.png" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.wonderingtechie.com/icons/favicon-thewonderingtechie.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.wonderingtechie.com/icons/favicon-thewonderingtechie.png">
+<link rel="manifest" href="https://www.wonderingtechie.com/icons/site.webmanifest">
+
+<link rel="canonical" href="https://www.wonderingtechie.com/post/2023/ci-options-with-tekton-pipelines/">
+
+    
+
+    
+    
+    <link rel="preload" href="https://www.wonderingtechie.com/css/styles.f143f2039d975cd60c5524f52c5fbb6dd2236d44d0d53d71b5cb6f6127d4fe8082960bbb71fe0345b5bab4119124e0b09c0b7d7f4238a9288afc02815d258f76.css" integrity = "sha512-8UPyA52XXNYMVST1LF&#43;7bdIjbUTQ1T1xtctvYSfU/oCClgu7cf4DRbW6tBGRJOCwnAt9f0I4qSiK/AKBXSWPdg==" as="style" crossorigin="anonymous">
+    <link rel="preload" href="https://www.wonderingtechie.com/js/bundle.min.8dac7e6b3daf6ae081ab65b9cf6a3012e43f656e2f9193f6e89f876d60a66b07178a7bfef267de004b850ea8b023ac48f68b16fdd8d5300dbb2d9d2518fe2dbf.js" as="script" integrity=
+    "sha512-jax&#43;az2vauCBq2W5z2owEuQ/ZW4vkZP26J&#43;HbWCmawcXinv&#43;8mfeAEuFDqiwI6xI9osW/djVMA27LZ0lGP4tvw==" crossorigin="anonymous">
+
+    
+    <link rel="stylesheet" type="text/css" href="https://www.wonderingtechie.com/css/styles.f143f2039d975cd60c5524f52c5fbb6dd2236d44d0d53d71b5cb6f6127d4fe8082960bbb71fe0345b5bab4119124e0b09c0b7d7f4238a9288afc02815d258f76.css" integrity="sha512-8UPyA52XXNYMVST1LF&#43;7bdIjbUTQ1T1xtctvYSfU/oCClgu7cf4DRbW6tBGRJOCwnAt9f0I4qSiK/AKBXSWPdg==" crossorigin="anonymous">
+    
+  </head>
+  
+  
+    
+  
+  <body data-code="7" data-lines="false" id="documentTop">
+
+<header class="nav_header" >
+  <nav class="nav"><a href='https://www.wonderingtechie.com/' class="nav_brand nav_item" title="The Wondering Techie">
+  <img src="https://www.wonderingtechie.com/logos/logo.png" class="logo" alt="The Wondering Techie">
+  <div class="nav_close">
+    <div><svg class="icon">
+  <use xlink:href="#open-menu"></use>
+</svg><svg class="icon">
+  <use xlink:href="#closeme"></use>
+</svg></div>
+  </div>
+</a>
+
+    <div class='nav_body nav_body_left'>
+      
+      
+      
+        
+
+  <div class="nav_parent">
+    <a href="https://www.wonderingtechie.com/" class="nav_item" title="Home">Home </a>
+  </div>
+  <div class="nav_parent">
+    <a href="https://www.wonderingtechie.com/about/" class="nav_item" title="About">About </a>
+  </div>
+      
+<div class='follow'>
+  <a href="https://github.com/skoussou">
+    <svg class="icon">
+  <use xlink:href="#github"></use>
+</svg>
+  </a>
+  <a href="https://twitter.com/SteliosKousouri">
+    <svg class="icon">
+  <use xlink:href="#twitter"></use>
+</svg>
+  </a>
+  <a href="https://www.linkedin.com/in/stelioskoussouris">
+    <svg class="icon">
+  <use xlink:href="#linkedin"></use>
+</svg>
+  </a>
+    
+  <a href="https://www.wonderingtechie.com/index.xml">
+    <svg class="icon">
+  <use xlink:href="#rss"></use>
+</svg>
+  </a>
+<div class="color_mode">
+  <input type="checkbox" class="color_choice" id="mode">
+</div>
+
+</div>
+
+    </div>
+  </nav>
+</header>
+
+    <main>
+  
+<div class="grid-inverse wrap content">
+  <article class="post_content">
+    <h1 class="post_title">CI Implementations with Tekton Resolvers and Pipelines As Code</h1>
+  <div class="post_meta">
+    <span><svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg></span>
+    <span class="post_date">
+      Jul 19, 2023</span>
+    <span class="post_time"> · 9 min read</span><span>&nbsp;· <a href='https://www.wonderingtechie.com/tags/cicd' title="cicd" class="post_tag button button_translucent">cicd
+        </a><a href='https://www.wonderingtechie.com/tags/tekton' title="tekton" class="post_tag button button_translucent">tekton
+        </a><a href='https://www.wonderingtechie.com/tags/openshift' title="OpenShift" class="post_tag button button_translucent">OpenShift
+        </a><a href='https://www.wonderingtechie.com/tags/devopstools' title="devopstools" class="post_tag button button_translucent">devopstools
+        </a>
+    </span>
+    <span class="page_only">&nbsp;·
+  <div class="post_share">
+    Share on:
+    <a href="https://twitter.com/intent/tweet?text=CI%20Implementations%20with%20Tekton%20Resolvers%20and%20Pipelines%20As%20Code&url=https%3a%2f%2fwww.wonderingtechie.com%2fpost%2f2023%2fci-options-with-tekton-pipelines%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+      <svg class="icon">
+  <use xlink:href="#twitter"></use>
+</svg>
+    </a>
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.wonderingtechie.com%2fpost%2f2023%2fci-options-with-tekton-pipelines%2f&t=CI%20Implementations%20with%20Tekton%20Resolvers%20and%20Pipelines%20As%20Code" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+      <svg class="icon">
+  <use xlink:href="#facebook"></use>
+</svg>
+    </a>
+    <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="Share on LinkedIn" rel="nofollow">
+      <svg class="icon">
+  <use xlink:href="#linkedin"></use>
+</svg>
+    </a>
+    <a href="https://www.wonderingtechie.com/post/2023/ci-options-with-tekton-pipelines/" title="Copy Link" class="link link_yank">
+      <svg class="icon">
+  <use xlink:href="#copy"></use>
+</svg>
+    </a>
+  </div>
+  </span>
+  </div>
+<div class="post_featured">
+
+
+
+
+
+
+
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+<figure>
+    <picture>
+
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+
+        <img class="image_figure image_featured image_internal" src="https://www.wonderingtechie.com/images/20230720/ci-tekton-resolvers-pipelines-as-code.png" alt="" loading="lazy" decoding="async" width="3506" height="2479"  />
+      
+
+    </picture>
+  </figure>
+
+
+      </div>
+    <div class="post_toc">
+      <h2>Overview</h2>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#the-cicd-and-gitops-lifecycle">The CICD and GitOps lifecycle</a></li>
+    <li><a href="#migrating-from-clustertask-and-task-to-tekton-resolvers">Migrating from <code>ClusterTask</code> and <code>Task</code> to <code>Tekton Resolvers</code></a>
+      <ul>
+        <li><a href="#migrating-to-cluster-resolvers">Migrating to <code>Cluster</code> Resolvers</a></li>
+        <li><a href="#migrating-to-git-resolvers">Migrating to <code>Git</code> Resolvers</a></li>
+        <li><a href="#migrating-to-bundle-resolvers">Migrating to <code>Bundle</code> Resolvers</a></li>
+      </ul>
+    </li>
+    <li><a href="#migrating-to-pipelines-as-code">Migrating to Pipelines As Code</a>
+      <ul>
+        <li><a href="#creation-of-a-pipelinerun-resource">Creation of a <code>PipelineRun</code> Resource</a></li>
+        <li><a href="#pipelines-as-code-integration-with-a-github-app">Pipelines as Code integration with a <code>GitHub App</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    <div class="post_body"><h2 id="overview">Overview</h2>
+<div style="text-align: justify"> 
+<p>For sometime now we have been, together with DevOps empowered application teams and DevOps engineers, using the <a href="https://docs.openshift.com/container-platform/4.13/cicd/pipelines/understanding-openshift-pipelines.html">OpenShift Pipelines</a>, OpenShift's productised version of <a href="https://tekton.dev/">tekton.dev</a>, as the Continuous Integration (CI) technology of choice when onboarding new applications or migrating existing ones into Red Hat's kubernetes.</p>
+<p>Recently, the article on <a href="https://cloud.redhat.com/blog/migration-from-clustertasks-to-tekton-resolvers-in-openshift-pipelines">Migration from ClusterTasks to Tekton Resolvers in OpenShift Pipelines</a> by colleagues <a href="https://www.linkedin.com/in/vincentdemeester/">Vincent Demeester</a> and <a href="https://www.linkedin.com/in/koustav-saha-7bb20580/">Koustav Saha</a> and the GA of <a href="https://docs.openshift.com/container-platform/4.13/cicd/pipelines/op-release-notes.html#compatibility-support-matrix_op-release-notes">Pipelines as code</a> prompted me to perform a refresher on the resources used as a baseline when starting a completely new implementation/migration or introducing the topic of tekton to a team.</p>
+<p>In this article we will go through the manner in which we performed a classic CICD release cycle with tekton and gitops as well as how we can overhaul the existing material to give practical substance to all possible manners of utilsing tasks in pipelines beyond installing them as <code>ClusterTask</code> or <code>Task</code> as well as moving from pipeline webhooks for CI (and CD) to pipeline as code.</p>
+</div>
+<h2 id="the-cicd-and-gitops-lifecycle">The CICD and GitOps lifecycle</h2>
+<div style="text-align: justify"> 
+<p>In the accompanying <a href="https://github.com/skoussou/tekton-gitops-workshop">tekton-gitops-workshop</a> github repository the setup populates:</p>
+<ul>
+<li>the OpenShift Gitops and Openshift Pipeline operators in an OpenShift cluster</li>
+<li>the Gitea Git Repository provider with 2 repositories
+<ul>
+<li><a href="https://github.com/skoussou/tekton-gitops-workshop/tree/main/application-source">application-source</a> repository hosts the application source</li>
+<li><a href="https://github.com/skoussou/tekton-gitops-workshop/tree/main/application-deploy">application-deploy</a> hosts an ArgoCD <code>Application</code> that in turn bootstraps via an <code>ApplicationSet</code> the environment based applications for <code>dev</code>, <code>test</code>, <code>prod</code>, delivers and monitors the kubernetes configurations for the application in each environment.</li>
+</ul>
+</li>
+<li>2 OpenShift pipelines
+<ul>
+<li><a href="https://github.com/skoussou/tekton-gitops-workshop/blob/main/application-cicd/resources/pipeline-ci.yaml">ci-pipeline</a>: runs the application testing, packaging and containerisation process</li>
+<li><a href="https://github.com/skoussou/tekton-gitops-workshop/blob/main/application-cicd/resources/pipeline-cd.yaml">cd-pipeline</a>: with a PR from the <code>ci-pipeline</code> to the <code>application-deploy</code> git repo the CD process initiates the process of delivering the new application deployments into OpenShift</li>
+</ul>
+</li>
+<li>Various <a href="https://github.com/skoussou/tekton-gitops-workshop/tree/main/application-cicd/resources">OpenShift Pipelines objects</a> (<code>Task</code>, <code>ClusterTask</code>, <code>Pipeline</code>, <code>EventListerner</code>, <code>TriggerBinding</code>, <code>TriggerTemplate</code>) are installed in order to facilitate the pipeline implementation and triggering.</li>
+</ul>
+<p>The resulting setup offers the ability through Git repository updates (as shown in the following diagram) to run through a lifecycle of Continuous Integration and Continuous Delivery with the tekton pipelines whilst the Continuous Deployment is handled by the ArgoCD component and again promoted via git Pull Requests.</p>
+<p>
+
+
+
+
+
+
+
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+<figure>
+    <picture>
+
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+
+        <img class="image_figure image_internal" src="https://www.wonderingtechie.com/images/20230720/CICD-Cycle.png" alt="CICD Lifecycle" loading="lazy" decoding="async" width="2904" height="1980"  />
+      
+
+    </picture>
+  </figure>
+
+</p>
+</div>
+<h2 id="migrating-from-clustertask-and-task-to-tekton-resolvers">Migrating from <code>ClusterTask</code> and <code>Task</code> to <code>Tekton Resolvers</code></h2>
+<div style="text-align: justify"> 
+<p>Between the <a href="https://cloud.redhat.com/blog/migration-from-clustertasks-to-tekton-resolvers-in-openshift-pipelines">article</a> mentioned earlier, the OpenShift <a href="https://docs.openshift.com/container-platform/4.13/cicd/pipelines/remote-pipelines-tasks-resolvers.html">Remote Pipelines Tasks Resolvers documentation</a> and <a href="https://tekton.dev/docs/pipelines/cluster-resolver/#requirements">tekton's documentation</a> there is very good information on how to configure the resolvers, what are the resolver types and purpose of each. We shall concentrate on how we made the changes to the original pipelines to take advantage of the resolver functionality.</p>
+<p>It is important to note at this point that the 2 pipelines contain the following type of tasks:</p>
+<ul>
+<li>
+<p><code>ClusterTask</code> resources</p>
+<ul>
+<li><code>git-clone</code> (clones a repo from the provided url)</li>
+<li><code>s2i-java</code> (clones a Git repository and builds and pushes a container image using S2I and a Java builder image).</li>
+</ul>
+</li>
+<li>
+<p>Custom <code>Task</code> resources</p>
+<ul>
+<li><a href="https://github.com/skoussou/tekton-gitops-workshop/blob/main/application-cicd/resources/task-next-environment.yaml">next-env</a> (works out the next environment to promote the updated image to)</li>
+<li><a href="https://github.com/skoussou/tekton-gitops-workshop/blob/main/application-cicd/resources/task-sync-argo.yaml">sync-argo</a> (executes an argocd sync to update the targeted environment resources)</li>
+<li><a href="https://github.com/skoussou/tekton-gitops-workshop/blob/main/application-cicd/resources/task-create-pr-to-deploy.yaml">create-pr-to-deploy</a> (creates a PR towards the <code>application-deploy</code> repository with an updated deployment to the latest produced image)</li>
+<li><a href="https://github.com/skoussou/tekton-gitops-workshop/blob/main/application-cicd/resources/task-generate-version.yaml">generate-version</a>(generates application version based on timestamp and pom version.)</li>
+<li><a href="https://github.com/skoussou/tekton-gitops-workshop/blob/main/application-cicd/resources/task-mock.yaml">mock</a>(a task that mocks pipeline activities)</li>
+<li><a href="https://github.com/skoussou/tekton-gitops-workshop/blob/main/application-cicd/resources/task-tag-image.yaml">tag-image</a>(Tags the image to the generated version)</li>
+</ul>
+</li>
+</ul>
+</div>
+<h3 id="migrating-to-cluster-resolvers">Migrating to <code>Cluster</code> Resolvers</h3>
+<div style="text-align: justify"> 
+<p>A cluster resolver is a Tekton Pipelines feature that allows you to reference tasks and pipelines from other namespaces, therefore it can act as a cluster wide known location for DevOps engineers to maintain tasks on behalf of pipeline creators who can in-turn reference them from that namespace.</p>
+<p>In the <a href="https://github.com/skoussou/tekton-gitops-workshop/blob/cluster-resolver">cluster-resolver</a> branch the setup has been updated with the 2 aforementioned <code>ClusterTask</code> resources <code>git-clone</code> and <code>s2i-java</code></p>
+<ul>
+<li>implemented as <code>Task</code> resources and</li>
+<li>installed in <code>sk-workshop-ci-components</code> namespace</li>
+</ul>
+<p>The <a href="https://github.com/skoussou/tekton-gitops-workshop/blob/cluster-resolver/application-cicd/resources/pipeline-ci.yaml">ci-pipeline</a> has been updated to use now the <code>resolver: cluster</code> to reference the task from the CI components namespace.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="w">  </span><span class="c"># ------------ CLONE APP SOURCE ------------ #</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">git-app-clone</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">      </span><span class="nt">taskRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">        </span><span class="nt">resolver</span><span class="p">:</span><span class="w"> </span><span class="l">cluster</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">        </span><span class="nt">params</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kind</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">task</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">name</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">git-clone-custom</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">namespace</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">$(params.CI_NS_PREFIX)-workshop-ci-components</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">   </span><span class="l">...</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">  </span><span class="c"># ------------ BUILD IMAGE ------------ #</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">build-image</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">      </span><span class="nt">runAfter</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">      </span>- <span class="l">nexus-upload</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w">      </span><span class="nt">taskRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">        </span><span class="nt">resolver</span><span class="p">:</span><span class="w"> </span><span class="l">cluster</span><span class="w">
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w">        </span><span class="nt">params</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kind</span><span class="w">
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">task</span><span class="w">
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">name</span><span class="w">
+</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">s2i-java-custom</span><span class="w">
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">namespace</span><span class="w">
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">$(params.CI_NS_PREFIX)-workshop-ci-components   </span><span class="w">
+</span></span></span></code></pre></div></div>
+<h3 id="migrating-to-git-resolvers">Migrating to <code>Git</code> Resolvers</h3>
+<div style="text-align: justify"> 
+<p>A <a href="https://docs.openshift.com/container-platform/4.13/cicd/pipelines/remote-pipelines-tasks-resolvers.html#resolver-git_remote-pipelines-tasks-resolvers">git resolver</a> is a Tekton Pipelines feature that allows you to reference tasks and pipelines from Git repositories., therefore it can act as a common team or organization source control location for DevOps engineers to maintain tasks on behalf of pipeline creators who can in-turn reference them from that repository.</p>
+<p>In the <a href="https://github.com/skoussou/tekton-gitops-workshop/blob/git-resolver">git-resolver</a> branch the setup has been updated with the 2 aforementioned <code>ClusterTask</code> resources <code>git-clone</code> and <code>s2i-java</code></p>
+<ul>
+<li>implemented as <code>Task</code> resources,</li>
+<li>now available from a purposed setup <a href="https://github.com/skoussou/tekton-catalog">tekton-catalog</a> repository with a versioned entry for <a href="https://github.com/skoussou/tekton-catalog/blob/main/ci-tasks/resources/git-clone-custom/0.1/git-clone.yaml">0.1/git-clone.yaml</a> and <a href="https://github.com/skoussou/tekton-catalog/blob/main/ci-tasks/resources/s2i-java-custom/0.1/s2i-java.yaml">0.1/s2i-java.yaml</a></li>
+</ul>
+<p>The <a href="https://github.com/skoussou/tekton-gitops-workshop/blob/git-resolver/application-cicd/resources/pipeline-ci.yaml">ci-pipeline</a> has been updated to use now the <code>resolver: git</code> to reference the task from <a href="https://github.com/skoussou/tekton-catalog/tree/main">tekton-catalog</a> repository.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="w">    </span><span class="c"># ------------ CLONE APP SOURCE ------------ #</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">git-app-clone</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">      </span><span class="nt">taskRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">        </span><span class="nt">resolver</span><span class="p">:</span><span class="w"> </span><span class="l">git</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">        </span><span class="nt">params</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">url</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;https://github.com/tektoncd/catalog.git&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">revision</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">pathInRepo</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">task/git-clone/0.9/git-clone.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">   </span><span class="l">...</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">    </span><span class="c"># ------------ BUILD IMAGE ------------ #</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">build-image</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">      </span><span class="nt">runAfter</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">        </span>- <span class="l">nexus-upload</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w">      </span><span class="nt">taskRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">        </span><span class="nt">resolver</span><span class="p">:</span><span class="w"> </span><span class="l">git</span><span class="w">
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w">        </span><span class="nt">params</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">url</span><span class="w">
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">https://github.com/skoussou/tekton-catalog.git</span><span class="w">
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">revision</span><span class="w">
+</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">pathInRepo</span><span class="w">
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">ci-tasks/resources/s2i-java-custom/0.1/s2i-java.yaml</span><span class="w">
+</span></span></span></code></pre></div></div>
+<h3 id="migrating-to-bundle-resolvers">Migrating to <code>Bundle</code> Resolvers</h3>
+<div style="text-align: justify"> 
+<p>A <a href="https://tekton.dev/docs/pipelines/bundle-resolver/">bundle resolver</a> is a feature in Tekton Pipelines that allows you to reference Tekton resources from a Tekton bundle image, therefore it can act as a common set of prepared images by devops engineers to maintain tasks on behalf of pipeline creators who can in-turn reference them from the bundles.</p>
+<p>In the <a href="https://github.com/skoussou/tekton-gitops-workshop/tree/bundle-resolver">bundle-resolver</a> branch the setup has been updated with the aforementioned <code>ClusterTask</code> resource <code>s2i-java</code></p>
+<ul>
+<li>implemented as a <code>Task</code> resource,</li>
+<li>now available from a purposed prepared image bundle stored in <a href="https://quay.io/repository/skoussou/s2i-java">quay.io/skoussou/s2i-java</a> repository.</li>
+</ul>
+<p>Firstly, the bundle was built from the <a href="https://github.com/skoussou/tekton-catalog/blob/main/ci-tasks/resources/s2i-java-custom/0.1/s2i-java.yaml">0.1/s2i-java.yaml</a> and versioned to 0.1</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-BASH" data-lang="BASH"><span class="line"><span class="ln">1</span><span class="cl">tkn bundle push quay.io/skoussou/s2i-java:0.1 -f ci-tasks/resources/s2i-java-custom/0.1/s2i-java.yaml
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl">*Warning*: This is an experimental command, it<span class="err">&#39;</span>s usage and behavior can change in the next release<span class="o">(</span>s<span class="o">)</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">Creating Tekton Bundle:
+</span></span><span class="line"><span class="ln">5</span><span class="cl">	- Added Task: s2i-java-custom to image
+</span></span><span class="line"><span class="ln">6</span><span class="cl">
+</span></span><span class="line"><span class="ln">7</span><span class="cl">Pushed Tekton Bundle to quay.io/skoussou/s2i-java@sha256:88fb756feeab8e79cf43ba4845cb4b5f2bc27c38f528bba95708c23b34a75908
+</span></span></code></pre></div><p>The <a href="https://raw.githubusercontent.com/skoussou/tekton-gitops-workshop/bundle-resolver/application-cicd/resources/pipeline-ci.yaml">ci-pipeline</a> has been updated to use now the <code>resolver: bundles</code> to reference the image bundle from <a href="https://quay.io/repository/skoussou/s2i-java">quay.io</a> repository.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c"># ------------ BUILD IMAGE ------------ #</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">build-image</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">    </span><span class="nt">runAfter</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">      </span>- <span class="l">nexus-upload</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">    </span><span class="nt">taskRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">      </span><span class="nt">resolver</span><span class="p">:</span><span class="w"> </span><span class="l">bundles</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">      </span><span class="nt">params</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">bundle</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">quay.io/skoussou/s2i-java:0.1</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">name</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">s2i-java-custom</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kind</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">task</span><span class="w">
+</span></span></span></code></pre></div></div>
+<h2 id="migrating-to-pipelines-as-code">Migrating to Pipelines As Code</h2>
+<div style="text-align: justify"> 
+<p>With the usage of <code>resolvers</code> we have moved away from managing pipeline tasks in a distributed and uncontrolled manner. However, up until this point the remainder of the pipeline resources (including <code>webhooks</code>, <code>eventlisteners</code>, <code>triggers</code>, <code>templates</code> and <code>pipelines</code>), required in order to automatically trigger the  <code>ci-pipeline</code> in OpenShift,  are still managed separately from the <code>application-source</code> repository, not to mention that they are required to be implemented and maintained adding an extra overhead.</p>
+<p>Pipelines-as-code (Generally Available on <a href="https://cloud.redhat.com/blog/openshift-pipelines-1.9-released">OpenShift Pipelines</a>) which allows to ship the CI/CD pipelines within the same git repository as the application, making it easier to keep both of them in sync in terms of release updates, is the feature we are now going to utilise to migrate the <code>ci-pipeline</code> to.</p>
+<p>An important note here is that <code>pipeline-as-code</code> functionality relies on integration with supported Git Repository Providers and as the current setup utilises <code>gitea</code>, which is not a supported <a href="https://docs.openshift.com/container-platform/4.13/cicd/pipelines/using-pipelines-as-code.html#using-pipelines-as-code-with-a-git-repository-hosting-service-provider">Pipeline as Code GIT Repository hosting provider</a>, the application source code is placed in a separate github <a href="https://github.com/skoussou/application-source">application-source</a> repository.</p>
+<h3 id="creation-of-a-pipelinerun-resource">Creation of a <code>PipelineRun</code> Resource</h3>
+<p>In order to achieve the migration</p>
+<ul>
+<li>the <code>pipeline-as-code</code> branch no longer contains the resources <a href="https://github.com/skoussou/tekton-gitops-workshop/blob/main/application-cicd/resources/trigger-quarkus-app-push.yaml">trigger-quarkus-app-push.yaml</a> and <a href="https://github.com/skoussou/tekton-gitops-workshop/blob/main/application-cicd/resources/pipeline-ci.yaml">pipeline-ci.yaml</a>, and</li>
+<li>instead they are replaced with a <code>PipelineRun</code> resource under the <a href="https://github.com/skoussou/application-source/blob/main/.tekton/pipelinerun.yaml">.tekton</a> directory.</li>
+</ul>
+<p>The <code>PipelineRun</code> contains the following important configurations in order to materialise the pipeline and all the necessary functionality including tasks, triggers etc.</p>
+<ol>
+<li>The definitions when the pipeline will be initiated inside OpenShift include:</li>
+</ol>
+<ul>
+<li>on a <code>push</code> or <code>pull request</code> <a href="https://github.com/skoussou/tekton-gitops-workshop/blob/7a169fab5ead38ec4d6a8da4f40a005d59ecdea3/application-source/.tekton/pipelinerun.yaml#L9">[1]</a></li>
+<li>on the <code>main</code> branch (of the source code repository) <a href="https://github.com/skoussou/tekton-gitops-workshop/blob/7a169fab5ead38ec4d6a8da4f40a005d59ecdea3/application-source/.tekton/pipelinerun.yaml#L12">[2]</a></li>
+<li>when the <code>pom.xml</code> has also been updated <a href="https://github.com/skoussou/tekton-gitops-workshop/blob/7a169fab5ead38ec4d6a8da4f40a005d59ecdea3/application-source/.tekton/pipelinerun.yaml#L37-L38">[3]</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="w">  </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">tekton.dev/v1beta1</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PipelineRun</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">quarkus-app</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">    </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">      </span><span class="c"># The event we are targeting as seen from the webhook payload</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">      </span><span class="c"># this can be an array too, i.e: [pull_request, push]</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">      </span><span class="nt">pipelinesascode.tekton.dev/on-event</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;[pull_request, push]&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">      </span><span class="c"># The branch or tag we are targeting (ie: main, refs/tags/*)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">      </span><span class="nt">pipelinesascode.tekton.dev/on-target-branch</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;[main]&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">      </span><span class="c"># Executes only for specific paths</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">      </span><span class="nt">pipelinesascode.tekton.dev/on-cel-expression</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="sd">        </span><span class="w">        </span><span class="l">event == &#34;push&#34; &amp;&amp; &#34;pom.xml&#34;.pathChanged()   </span><span class="w">
+</span></span></span></code></pre></div><ol start="2">
+<li>References <a href="https://github.com/skoussou/application-source/blob/main/.tekton/pipelinerun.yaml#L17-L31">[4]</a> to remote tasks via the <a href="https://docs.openshift.com/container-platform/4.13/cicd/pipelines/using-pipelines-as-code.html#using-pipelines-as-code-resolver_using-pipelines-as-code">Pipeline as Code resolver</a> in order to retrieve the tasks either from git repository or the hub.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="w">  </span><span class="c"># git-clone custom task</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">  </span><span class="nt">pipelinesascode.tekton.dev/task</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://github.com/skoussou/tekton-catalog/blob/main/ci-tasks/resources/git-clone-custom/0.1/git-clone.yaml&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">  </span><span class="c"># Use maven task from the hub to test our Java project</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">  </span><span class="nt">pipelinesascode.tekton.dev/task-1</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;maven&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">   
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">  </span><span class="c"># additional custom tasks</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">  </span><span class="nt">pipelinesascode.tekton.dev/task-2</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://github.com/skoussou/tekton-catalog/blob/main/ci-tasks/resources/task-generate-version/0.1/task-generate-version.yaml&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">  </span><span class="nt">pipelinesascode.tekton.dev/task-3</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://github.com/skoussou/tekton-catalog/blob/main/ci-tasks/resources/mock/0.1/task-mock.yaml&#34;</span><span class="w">    
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">  </span><span class="nt">pipelinesascode.tekton.dev/task-4</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://github.com/skoussou/tekton-catalog/blob/main/ci-tasks/resources/s2i-java-custom/0.1/s2i-java.yaml&#34;</span><span class="w">    
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">  </span><span class="nt">pipelinesascode.tekton.dev/task-5</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://github.com/skoussou/tekton-catalog/blob/main/ci-tasks/resources/task-tag-image/0.1/task-tag-image.yaml&#34;</span><span class="w">    
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">  </span><span class="nt">pipelinesascode.tekton.dev/task-6</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://github.com/skoussou/tekton-catalog/blob/main/ci-tasks/resources/task-create-pr-to-deploy/0.1/task-create-pr-to-deploy.yaml&#34;</span><span class="w">       
+</span></span></span></code></pre></div><ol start="3">
+<li>The <code>parameters</code> which determine:</li>
+</ol>
+<ul>
+<li>dynamic <a href="https://docs.openshift.com/container-platform/4.13/cicd/pipelines/using-pipelines-as-code.html#creating-pipeline-run-using-pipelines-as-code_using-pipelines-as-code">expandable</a> parameters which can be pulled from the commit</li>
+<li>or hardcoded <a href="https://github.com/skoussou/tekton-gitops-workshop/blob/7a169fab5ead38ec4d6a8da4f40a005d59ecdea3/application-source/.tekton/pipelinerun.yaml#L41-L70">[5]</a> ones.</li>
+</ul>
+<ol start="4">
+<li>The <code>pipelineSpec</code> which determines the pipeline either as:</li>
+</ol>
+<ul>
+<li>a <a href="https://docs.openshift.com/container-platform/4.13/cicd/pipelines/using-pipelines-as-code.html#using-remote-pipeline-annotations-with-pipelines-as-code_using-pipelines-as-code">reference</a> via the annotation <code> pipelinesascode.tekton.dev/pipeline: &quot;&lt;https://git.provider/raw/pipeline.yaml&gt;&quot;</code></li>
+<li>or (as delivered here) a list of tasks <a href="https://github.com/skoussou/tekton-gitops-workshop/blob/7a169fab5ead38ec4d6a8da4f40a005d59ecdea3/application-source/.tekton/pipelinerun.yaml#L71-L280">[6]</a></li>
+</ul>
+<h3 id="pipelines-as-code-integration-with-a-github-app">Pipelines as Code integration with a <code>GitHub App</code></h3>
+<p>GitHub Apps act as a point of integration with Red Hat OpenShift Pipelines and in order to achieve this a single GitHub App for all cluster users is configured. This can be performed both via <code>tkn app</code> CLI or <a href="https://docs.openshift.com/container-platform/4.13/cicd/pipelines/using-pipelines-as-code.html#configuring-github-app-for-pac">manually</a>, here the former has been selected.</p>
+<p>In order to configure Pipelines as Code to access the newly created GitHub App the following is executed whilst logged into OpenShift and within the <code>openshift-pipelines</code> namespace. As a result a <code>Secret</code> <a href="https://docs.openshift.com/container-platform/4.13/cicd/pipelines/using-pipelines-as-code.html#configuring-pac-for-github-app">resource</a> <code>pipelines-as-code-secret</code> is created in <code>openshift-pipelines</code> enabling the integration.</p>
+<blockquote>
+<p>Note: the Github App name must be unique.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-BASH" data-lang="BASH"><span class="line"><span class="ln"> 1</span><span class="cl">$ oc project openshift-pipelines
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">$ tkn pac <span class="nv">bootstrap</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">  <span class="o">=</span>&gt; Checking <span class="k">if</span> Pipelines as Code is installed.
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">  ✓ Pipelines as Code is already installed.
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">  ? Enter the name of your GitHub application:  test-ppln-as-code
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">  👀 I have detected an OpenShift Route on: https://pipelines-as-code-controller-openshift-pipelines.apps.&lt;CLUSTER_NAME&gt;.&lt;DOMAIN_NAME&gt;
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">  ? Do you want me to use it? Yes
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">  🌍 Starting a web browser on http://localhost:8080, click on the button to create your GitHub APP
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">  🔑 Secret pipelines-as-code-secret has been created in the openshift-pipelines namespace
+</span></span><span class="line"><span class="ln">10</span><span class="cl">  🚀 You can now add your newly created application on your repository by going to this URL:
+</span></span><span class="line"><span class="ln">11</span><span class="cl">          
+</span></span><span class="line"><span class="ln">12</span><span class="cl">  https://github.com/apps/test-ppln-as-code
+</span></span><span class="line"><span class="ln">13</span><span class="cl">          
+</span></span><span class="line"><span class="ln">14</span><span class="cl">  💡 Don<span class="err">&#39;</span>t forget to run the <span class="s2">&#34;tkn pac create repo&#34;</span> to create a new Repository CRD on your cluster.
+</span></span></code></pre></div><p>The new <code>Github App</code> is associated with the source repository.</p>
+<p>
+
+
+
+
+
+
+
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+<figure>
+    <picture>
+
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+
+        <img class="image_figure image_internal" src="https://www.wonderingtechie.com/images/20230720/pipeline-as-code-github-app.png" alt="Github App" loading="lazy" decoding="async" width="1686" height="798"  />
+      
+
+    </picture>
+  </figure>
+
+</p>
+<p>Finally the following command <a href="https://docs.openshift.com/container-platform/4.13/cicd/pipelines/using-pipelines-as-code.html#using-pipelines-as-code-with-github-webhook_using-pipelines-as-code">adds a webhook and a Repository CR</a> automatically for the pipeline as code to process events from <a href="https://github.com/skoussou/application-source">application-source</a> repository and run the pipeline in <code>sk-workshop-components</code> namespace based on the <a href="https://docs.openshift.com/container-platform/4.13/cicd/pipelines/using-pipelines-as-code.html#using-repository-crd-with-pipelines-as-code_using-pipelines-as-code">Repository CR</a>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-BASH" data-lang="BASH"><span class="line"><span class="ln">1</span><span class="cl">$ tkn pac create repository
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  ? Enter the Git repository url <span class="o">(</span>default: https://github.com/skoussou/tekton-gitops-workshop<span class="o">)</span>:  https://github.com/skoussou/application-source
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  ? Please enter the namespace where the pipeline should run <span class="o">(</span>default: openshift-pipelines<span class="o">)</span>: sk-workshop-components
+</span></span><span class="line"><span class="ln">4</span><span class="cl">  ✓ Repository skoussou-application-source has been created in sk-workshop-components namespace
+</span></span><span class="line"><span class="ln">5</span><span class="cl">  ℹ Directory .tekton has been created.
+</span></span><span class="line"><span class="ln">6</span><span class="cl">  ✓ A basic template has been created in .tekton/pipelinerun.yaml, feel free to customize it.
+</span></span><span class="line"><span class="ln">7</span><span class="cl">  ℹ You can <span class="nb">test</span> your pipeline by pushing generated template to your git repository
+</span></span></code></pre></div><p>Now the pipeline as code reacts to any <code>push</code> event and initiates a new <code>PipelineRun</code> (for more pac information read <a href="https://cloud.redhat.com/blog/create-developer-joy-with-new-pipelines-as-code-feature-on-openshift">here</a>).</p>
+<p>
+
+
+
+
+
+
+
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+<figure>
+    <picture>
+
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+
+        <img class="image_figure image_internal" src="https://www.wonderingtechie.com/images/20230720/pac.png" alt="Pipeline As Code Flow" loading="lazy" decoding="async" width="4543" height="876"  />
+      
+
+    </picture>
+  </figure>
+
+</p>
+<p>The results of the <code>PipelineRun</code> are not only reported in the OpenShift console but additionally shared back on the github repo.</p>
+<p>
+
+
+
+
+
+
+
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+<figure>
+    <picture>
+
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+
+        <img class="image_figure image_internal" src="https://www.wonderingtechie.com/images/20230720/pac-results.png" alt="Pipeline As Code Results" loading="lazy" decoding="async" width="2214" height="713"  />
+      
+
+    </picture>
+  </figure>
+
+</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The efforts have showcased how as a team we can better organize both pipeline components such as tasks and pipelines in order to promote re-usability, versioning and maintenance. There are still some questions open on the use of pipeline as code in multi component applications however the ease of setting up the flow in comparison to the complexity of maintaining all tekton CRs to achieve the same effect is undoubtedly impressive.</p>
+</div>
+
+    </div>
+<div class="post_comments">
+  
+  
+  
+</div>
+
+
+
+  </article>
+<aside class="sidebar">
+  <section class="sidebar_inner">
+        <h2>Stelios Kousouris</h2>
+      <div class="author_bio">
+        Technologist, Enthusiast Application Developer, Mentor, lifelong learner, avid fisherman
+      </div>
+      <a href='https://www.wonderingtechie.com/about/' class="button mt-1" role="button" title='Read More'>Read More</a>
+
+    
+    
+    <h2 class="mt-4">Recent Posts</h2>
+    <ul class="flex-column">
+      <li>
+        <a href="https://www.wonderingtechie.com/post/2023/aws-lambda-to-quarkus-migration-patterns/" class="nav-link" title="AWS Lambda to Quarkus Migration Patterns">AWS Lambda to Quarkus Migration Patterns</a>
+      </li>
+      <li>
+        <a href="https://www.wonderingtechie.com/post/2022/ossm-security-with-mtls-for-egress-edge-traffic/" class="nav-link" title="Red Hat OpenShift Service Mesh (OSSM) - Security options with mTLS for egress edge traffic">Red Hat OpenShift Service Mesh (OSSM) - Security options with mTLS for egress edge traffic</a>
+      </li>
+      <li>
+        <a href="https://www.wonderingtechie.com/post/2022/ossm-federation-scripted/" class="nav-link" title="Red Hat Openshift Service Mesh - Federation Automated Setup">Red Hat Openshift Service Mesh - Federation Automated Setup</a>
+      </li>
+      <li>
+        <a href="https://www.wonderingtechie.com/post/2022/ossm-mtls-on-or-off/" class="nav-link" title="mTLS in the Mesh with Redhat OpenShift Service Mesh (OSSM) - On or Off?">mTLS in the Mesh with Redhat OpenShift Service Mesh (OSSM) - On or Off?</a>
+      </li>
+      <li>
+        <a href="https://www.wonderingtechie.com/post/2022/part-3-application-trouble-in-the-cloud-application-functional-issues/" class="nav-link" title="Part 3 - Application Troubles in the Cloud (Symptom: Application Functional Problems)">Part 3 - Application Troubles in the Cloud (Symptom: Application Functional Problems)</a>
+      </li>
+      <li>
+        <a href="https://www.wonderingtechie.com/post/2022/part-2-application-trouble-in-the-cloud-servicemesh-app-performance/" class="nav-link" title="Part 2 - Application Troubles in the Cloud (Symptom: Performance Problems whilst part of a Service Mesh)">Part 2 - Application Troubles in the Cloud (Symptom: Performance Problems whilst part of a Service Mesh)</a>
+      </li>
+      <li>
+        <a href="https://www.wonderingtechie.com/post/2022/part-1-application-trouble-in-the-cloud-pod-restarts/" class="nav-link" title="Part 1 - Application Troubles in the Cloud (Symptom: Kubernetes POD Failures or often Restarts)">Part 1 - Application Troubles in the Cloud (Symptom: Kubernetes POD Failures or often Restarts)</a>
+      </li>
+    </ul>
+    <div>
+      <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
+      <nav class="tags_nav">
+        <a href='https://www.wonderingtechie.com/categories/openshift/' class="post_tag button button_translucent" title="openshift">
+          OPENSHIFT
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/categories/servicemesh/' class="post_tag button button_translucent" title="servicemesh">
+          SERVICEMESH
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/categories/cicd/' class="post_tag button button_translucent" title="cicd">
+          CICD
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/categories/cloudnative/' class="post_tag button button_translucent" title="cloudnative">
+          CLOUDNATIVE
+          <span class="button_tally">1</span>
+        </a>
+        
+        
+      </nav>
+    </div>
+    <div>
+      <h2 class="mt-4 taxonomy" id="series-section">Series</h2>
+      <nav class="tags_nav">
+        <a href='https://www.wonderingtechie.com/series/cloud-apps-troubleshoot/' class="post_tag button button_translucent" title="cloud-apps-troubleshoot">
+          CLOUD-APPS-TROUBLESHOOT
+          <span class="button_tally">3</span>
+        </a>
+        
+        
+      </nav>
+    </div>
+    <div>
+      <h2 class="mt-4 taxonomy" id="tags-section">Tags</h2>
+      <nav class="tags_nav">
+        <a href='https://www.wonderingtechie.com/tags/openshift/' class="post_tag button button_translucent" title="openshift">
+          OPENSHIFT
+          <span class="button_tally">8</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/tags/cloudapps/' class="post_tag button button_translucent" title="cloudapps">
+          CLOUDAPPS
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/tags/ossm/' class="post_tag button button_translucent" title="ossm">
+          OSSM
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/tags/servicemesh/' class="post_tag button button_translucent" title="servicemesh">
+          SERVICEMESH
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/tags/troubleshooting/' class="post_tag button button_translucent" title="troubleshooting">
+          TROUBLESHOOTING
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/tags/cicd/' class="post_tag button button_translucent" title="cicd">
+          CICD
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/tags/cloudnative/' class="post_tag button button_translucent" title="cloudnative">
+          CLOUDNATIVE
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/tags/containers/' class="post_tag button button_translucent" title="containers">
+          CONTAINERS
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/tags/devopstools/' class="post_tag button button_translucent" title="devopstools">
+          DEVOPSTOOLS
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/tags/index/' class="post_tag button button_translucent" title="index">
+          INDEX
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/tags/microservices/' class="post_tag button button_translucent" title="microservices">
+          MICROSERVICES
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/tags/mtls/' class="post_tag button button_translucent" title="mtls">
+          MTLS
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/tags/quarkus/' class="post_tag button button_translucent" title="quarkus">
+          QUARKUS
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/tags/tekton/' class="post_tag button button_translucent" title="tekton">
+          TEKTON
+          <span class="button_tally">1</span>
+        </a>
+        
+        
+      </nav>
+    </div>
+    <div>
+      <h2 class="mt-4 taxonomy" id="years-section">Posts by Year</h2>
+      <nav class="tags_nav">
+        <a href='https://www.wonderingtechie.com/years/2022/' class="post_tag button button_translucent" title="2022">
+          2022
+          <span class="button_tally">6</span>
+        </a>
+        
+        <a href='https://www.wonderingtechie.com/years/2023/' class="post_tag button button_translucent" title="2023">
+          2023
+          <span class="button_tally">2</span>
+        </a>
+        
+        
+      </nav>
+    </div>
+  </section>
+</aside>
+
+  
+</div>
+    </main><svg width="0" height="0" class="hidden">
+  <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
+    <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.001 18.001" id="twitter">
+    <path d="M15.891 4.013c.808-.496 1.343-1.173 1.605-2.034a8.68 8.68 0 0 1-2.351.861c-.703-.756-1.593-1.14-2.66-1.14-1.043 0-1.924.366-2.643 1.078a3.56 3.56 0 0 0-1.076 2.605c0 .309.039.585.117.819-3.076-.105-5.622-1.381-7.628-3.837-.34.601-.51 1.213-.51 1.846 0 1.301.549 2.332 1.645 3.089-.625-.053-1.176-.211-1.645-.47 0 .929.273 1.705.82 2.388a3.623 3.623 0 0 0 2.115 1.291c-.312.08-.641.118-.979.118-.312 0-.533-.026-.664-.083.23.757.664 1.371 1.291 1.841a3.652 3.652 0 0 0 2.152.743C4.148 14.173 2.625 14.69.902 14.69c-.422 0-.721-.006-.902-.038 1.697 1.102 3.586 1.649 5.676 1.649 2.139 0 4.029-.542 5.674-1.626 1.645-1.078 2.859-2.408 3.639-3.974a10.77 10.77 0 0 0 1.172-4.892v-.468a7.788 7.788 0 0 0 1.84-1.921 8.142 8.142 0 0 1-2.11.593z"
+      ></path>
+  </symbol>
+  <symbol aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="mail">
+    <path  d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="calendar">
+    <path d="M452 40h-24V0h-40v40H124V0H84v40H60C26.916 40 0 66.916 0 100v352c0 33.084 26.916 60 60 60h392c33.084 0 60-26.916 60-60V100c0-33.084-26.916-60-60-60zm20 412c0 11.028-8.972 20-20 20H60c-11.028 0-20-8.972-20-20V188h432v264zm0-304H40v-48c0-11.028 8.972-20 20-20h24v40h40V80h264v40h40V80h24c11.028 0 20 8.972 20 20v48z"></path>
+    <path d="M76 230h40v40H76zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zM76 310h40v40H76zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zM76 390h40v40H76zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zm80-80h40v40h-40z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="github">
+    <path d="M255.968 5.329C114.624 5.329 0 120.401 0 262.353c0 113.536 73.344 209.856 175.104 243.872 12.8 2.368 17.472-5.568 17.472-12.384 0-6.112-.224-22.272-.352-43.712-71.2 15.52-86.24-34.464-86.24-34.464-11.616-29.696-28.416-37.6-28.416-37.6-23.264-15.936 1.728-15.616 1.728-15.616 25.696 1.824 39.2 26.496 39.2 26.496 22.848 39.264 59.936 27.936 74.528 21.344 2.304-16.608 8.928-27.936 16.256-34.368-56.832-6.496-116.608-28.544-116.608-127.008 0-28.064 9.984-51.008 26.368-68.992-2.656-6.496-11.424-32.64 2.496-68 0 0 21.504-6.912 70.4 26.336 20.416-5.696 42.304-8.544 64.096-8.64 21.728.128 43.648 2.944 64.096 8.672 48.864-33.248 70.336-26.336 70.336-26.336 13.952 35.392 5.184 61.504 2.56 68 16.416 17.984 26.304 40.928 26.304 68.992 0 98.72-59.84 120.448-116.864 126.816 9.184 7.936 17.376 23.616 17.376 47.584 0 34.368-.32 62.08-.32 70.496 0 6.88 4.608 14.88 17.6 12.352C438.72 472.145 512 375.857 512 262.353 512 120.401 397.376 5.329 255.968 5.329z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 212" id="gitlab">
+    <path d="M12.3 74.7h54L43.3 3c-1-3.6-6.4-3.6-7.6 0L12.3 74.8z" />
+    <path d="M12.3 74.7L.5 111c-1 3.2 0 6.8 3 8.8l101.6 74-92.5-119z"/>
+    <path d="M105 193.7l-38.6-119h-54l92.7 119z"/>
+    <path d="M105 193.7l38.7-119H66.4l38.7 119z"/>
+    <path d="M105 193.7l38.7-119H198l-93 119z"/>
+    <path d="M198 74.7l11.6 36.2c1 3 0 6.6-3 8.6l-101.5 74 93-119z"/>
+    <path d="M198 74.7h-54.3L167 3c1.2-3.6 6.4-3.6 7.6 0L198 74.8z"/> 
+  </symbol>
+  <symbol viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="rss">
+    <circle cx="3.429" cy="20.571" r="3.429"></circle>
+    <path d="M11.429 24h4.57C15.999 15.179 8.821 8.001 0 8v4.572c6.302.001 11.429 5.126 11.429 11.428z"></path>
+    <path d="M24 24C24 10.766 13.234 0 0 0v4.571c10.714 0 19.43 8.714 19.43 19.429z"></path>
+  </symbol>
+  <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="linkedin">
+    <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h362c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zM181 406h-60V196h60zm0-240h-60v-60h60zm210 240h-60V286c0-16.54-13.46-30-30-30s-30 13.46-30 30v120h-60V196h60v11.309C286.719 202.422 296.93 196 316 196c40.691.043 75 36.547 75 79.688zm0 0"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" id="arrow">
+    <path d="M604.501 440.509L325.398 134.956c-5.331-5.357-12.423-7.627-19.386-7.27-6.989-.357-14.056 1.913-19.387 7.27L7.499 440.509c-9.999 10.024-9.999 26.298 0 36.323s26.223 10.024 36.222 0l262.293-287.164L568.28 476.832c9.999 10.024 26.222 10.024 36.221 0 9.999-10.023 9.999-26.298 0-36.323z"></path>
+  </symbol>
+  <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="carly">
+    <path d="M504.971 239.029L448 182.059V84c0-46.317-37.682-84-84-84h-44c-13.255 0-24 10.745-24 24s10.745 24 24 24h44c19.851 0 36 16.149 36 36v108c0 6.365 2.529 12.47 7.029 16.971L454.059 256l-47.029 47.029A24.002 24.002 0 0 0 400 320v108c0 19.851-16.149 36-36 36h-44c-13.255 0-24 10.745-24 24s10.745 24 24 24h44c46.318 0 84-37.683 84-84v-98.059l56.971-56.971c9.372-9.372 9.372-24.568 0-33.941zM112 192V84c0-19.851 16.149-36 36-36h44c13.255 0 24-10.745 24-24S205.255 0 192 0h-44c-46.318 0-84 37.683-84 84v98.059l-56.971 56.97c-9.373 9.373-9.373 24.568 0 33.941L64 329.941V428c0 46.317 37.682 84 84 84h44c13.255 0 24-10.745 24-24s-10.745-24-24-24h-44c-19.851 0-36-16.149-36-36V320c0-6.365-2.529-12.47-7.029-16.971L57.941 256l47.029-47.029A24.002 24.002 0 0 0 112 192z"></path>
+  </symbol>
+  <symbol viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="copy">
+    <path d="M23 2.75A2.75 2.75 0 0 0 20.25 0H8.75A2.75 2.75 0 0 0 6 2.75v13.5A2.75 2.75 0 0 0 8.75 19h11.5A2.75 2.75 0 0 0 23 16.25zM18.25 14.5h-7.5a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5zm0-3h-7.5a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5zm0-3h-7.5a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5z"></path>
+    <path d="M8.75 20.5a4.255 4.255 0 0 1-4.25-4.25V2.75c0-.086.02-.166.025-.25H3.75A2.752 2.752 0 0 0 1 5.25v16A2.752 2.752 0 0 0 3.75 24h12a2.752 2.752 0 0 0 2.75-2.75v-.75z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.001 512.001" id="closeme">
+    <path d="M284.286 256.002L506.143 34.144c7.811-7.811 7.811-20.475 0-28.285-7.811-7.81-20.475-7.811-28.285 0L256 227.717 34.143 5.859c-7.811-7.811-20.475-7.811-28.285 0-7.81 7.811-7.811 20.475 0 28.285l221.857 221.857L5.858 477.859c-7.811 7.811-7.811 20.475 0 28.285a19.938 19.938 0 0 0 14.143 5.857 19.94 19.94 0 0 0 14.143-5.857L256 284.287l221.857 221.857c3.905 3.905 9.024 5.857 14.143 5.857s10.237-1.952 14.143-5.857c7.811-7.811 7.811-20.475 0-28.285L284.286 256.002z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="open-menu">
+    <path d="M492 236H20c-11.046 0-20 8.954-20 20s8.954 20 20 20h472c11.046 0 20-8.954 20-20s-8.954-20-20-20zm0-160H20C8.954 76 0 84.954 0 96s8.954 20 20 20h472c11.046 0 20-8.954 20-20s-8.954-20-20-20zm0 320H20c-11.046 0-20 8.954-20 20s8.954 20 20 20h472c11.046 0 20-8.954 20-20s-8.954-20-20-20z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="instagram">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id=youtube>
+    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="stackoverflow">
+    <path d="M21 27v-8h3v11H0V19h3v8h18z"></path><path d="M17.1.2L15 1.8l7.9 10.6 2.1-1.6L17.1.2zm3.7 14.7L10.6 6.4l1.7-2 10.2 8.5-1.7 2zM7.2 12.3l12 5.6 1.1-2.4-12-5.6-1.1 2.4zm-1.8 6.8l13.56 1.96.17-2.38-13.26-2.55-.47 2.97zM19 25H5v-3h14v3z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="xing">
+    <path d="M18.188 0c-.517 0-.741.325-.927.66 0 0-7.455 13.224-7.702 13.657.015.024 4.919 9.023 4.919 9.023.17.308.436.66.967.66h3.454c.211 0 .375-.078.463-.22.089-.151.089-.346-.009-.536l-4.879-8.916c-.004-.006-.004-.016 0-.022L22.139.756c.095-.191.097-.387.006-.535C22.056.078 21.894 0 21.686 0h-3.498zM3.648 4.74c-.211 0-.385.074-.473.216-.09.149-.078.339.02.531l2.34 4.05c.004.01.004.016 0 .021L1.86 16.051c-.099.188-.093.381 0 .529.085.142.239.234.45.234h3.461c.518 0 .766-.348.945-.667l3.734-6.609-2.378-4.155c-.172-.315-.434-.659-.962-.659H3.648v.016z"/>
+  </symbol>
+</svg>
+
+
+<footer class="footer">
+  <div class="footer_inner wrap pale">
+    <img src='https://www.wonderingtechie.com/icons/favicon-thewonderingtechie.png' class="icon icon_2 transparent" alt="The Wondering Techie">
+    <p>Copyright&nbsp;<span class="year"></span>&nbsp;THE WONDERING TECHIE. All Rights Reserved</p><a class="to_top" href="#documentTop">
+  <svg class="icon">
+  <use xlink:href="#arrow"></use>
+</svg>
+</a>
+
+  </div>
+</footer>
+
+    <script type="text/javascript" src="https://www.wonderingtechie.com/js/bundle.min.8dac7e6b3daf6ae081ab65b9cf6a3012e43f656e2f9193f6e89f876d60a66b07178a7bfef267de004b850ea8b023ac48f68b16fdd8d5300dbb2d9d2518fe2dbf.js" integrity="sha512-jax&#43;az2vauCBq2W5z2owEuQ/ZW4vkZP26J&#43;HbWCmawcXinv&#43;8mfeAEuFDqiwI6xI9osW/djVMA27LZ0lGP4tvw==" crossorigin="anonymous"></script>
+    
+  </body>
+</html>

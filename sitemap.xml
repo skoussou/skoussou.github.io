@@ -3,15 +3,39 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.wonderingtechie.com/</loc>
-    <lastmod>2023-07-12T00:00:00+00:00</lastmod>
+    <lastmod>2023-07-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.wonderingtechie.com/years/2023/</loc>
-    <lastmod>2023-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.wonderingtechie.com/post/2023/aws-lambda-to-quarkus-migration-patterns/</loc>
-    <lastmod>2023-07-12T00:00:00+00:00</lastmod>
+    <lastmod>2023-07-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.wonderingtechie.com/categories/</loc>
+    <lastmod>2023-07-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/post/2023/ci-options-with-tekton-pipelines/</loc>
+    <lastmod>2023-07-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/tags/cicd/</loc>
+    <lastmod>2023-07-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/categories/cicd/</loc>
+    <lastmod>2023-07-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/tags/devopstools/</loc>
+    <lastmod>2023-07-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/tags/openshift/</loc>
+    <lastmod>2023-07-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/tags/</loc>
+    <lastmod>2023-07-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/tags/tekton/</loc>
+    <lastmod>2023-07-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/years/</loc>
+    <lastmod>2023-07-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wonderingtechie.com/post/2023/aws-lambda-to-quarkus-migration-patterns/</loc>
     <lastmod>2023-07-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.wonderingtechie.com/tags/cloudnative/</loc>
@@ -26,16 +50,7 @@
     <loc>https://www.wonderingtechie.com/tags/microservices/</loc>
     <lastmod>2023-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://www.wonderingtechie.com/tags/openshift/</loc>
-    <lastmod>2023-07-12T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://www.wonderingtechie.com/tags/quarkus/</loc>
-    <lastmod>2023-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.wonderingtechie.com/tags/</loc>
-    <lastmod>2023-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.wonderingtechie.com/years/</loc>
     <lastmod>2023-07-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.wonderingtechie.com/years/2022/</loc>

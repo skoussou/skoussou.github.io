@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tekton on The Wondering Techie</title>
+    <link>https://www.wonderingtechie.com/tags/tekton/</link>
+    <description>Recent content in tekton on The Wondering Techie</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wonderingtechie.com/tags/tekton/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CI Implementations with Tekton Resolvers and Pipelines As Code</title>
+      <link>https://www.wonderingtechie.com/post/2023/ci-options-with-tekton-pipelines/</link>
+      <pubDate>Wed, 19 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wonderingtechie.com/post/2023/ci-options-with-tekton-pipelines/</guid>
+      <description>
+        
+          
+            Overview For sometime now we have been, together with DevOps empowered application teams and DevOps engineers, using the OpenShift Pipelines, OpenShift&#39;s productised version of tekton.dev, as the Continuous Integration (CI) technology of choice when onboarding new applications or migrating existing ones into Red Hat&#39;s kubernetes.
+Recently, the article on Migration from ClusterTasks to Tekton Resolvers in OpenShift Pipelines by colleagues Vincent Demeester and Koustav Saha and the GA of Pipelines as code prompted me to perform a refresher on the resources used as a baseline when starting a completely new implementation/migration or introducing the topic of tekton to a team.
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
